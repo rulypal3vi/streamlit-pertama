@@ -104,30 +104,49 @@ def style_dark_figure(fig, ax=None):
 # ============================================================
 # KONEKSI MONGODB ATLAS
 # ============================================================
-@st.cache_resource
-def get_mongo_client():
-    """Koneksi aman ke MongoDB Atlas dengan fallback st.secrets dan .env."""
-    if not MONGO_AVAILABLE:
-        return None
+@st.cache_resource(show_spinner=False)
+def _init_mongo_client(uri: str):
+    """Membuka koneksi MongoClient aman dengan timeout 10 detik dan auto-fallback TLS."""
+    clean_uri = uri.strip().strip('"').strip("'")
+    # Coba 1: Menggunakan CA bundle dari certifi
     try:
-        uri = None
-        try:
-            if "MONGODB_URI" in st.secrets:
-                uri = st.secrets["MONGODB_URI"]
-        except Exception:
-            pass
-
-        if not uri:
-            uri = os.getenv("MONGODB_URI")
-
-        if not uri:
-            return None
-
-        client = MongoClient(uri, tlsCAFile=certifi.where(), serverSelectionTimeoutMS=4000)
-        client.admin.command("ping")
-        return client
+        c = MongoClient(clean_uri, tlsCAFile=certifi.where(), serverSelectionTimeoutMS=10000)
+        c.admin.command("ping")
+        return c
     except Exception:
-        return None
+        # Coba 2: Menggunakan CA sertifikat bawaan sistem OS
+        c = MongoClient(clean_uri, serverSelectionTimeoutMS=10000)
+        c.admin.command("ping")
+        return c
+
+
+def get_mongo_client():
+    """Mengambil koneksi MongoDB dengan fallback st.secrets dan .env, serta status diagnostik."""
+    if not MONGO_AVAILABLE:
+        return None, "Library pymongo/certifi belum terinstal"
+
+    uri = None
+    # 1. Coba dari st.secrets (Streamlit Cloud)
+    try:
+        if "MONGODB_URI" in st.secrets:
+            uri = st.secrets["MONGODB_URI"]
+    except Exception as e_sec:
+        return None, f"Format secrets keliru: {e_sec}"
+
+    # 2. Coba dari environment variable .env (Lokal)
+    if not uri:
+        uri = os.getenv("MONGODB_URI")
+
+    if not uri:
+        return None, "Secret MONGODB_URI belum disetel di Cloud"
+
+    try:
+        client = _init_mongo_client(str(uri))
+        return client, "Connected"
+    except Exception as e_conn:
+        err = str(e_conn)
+        short_err = "Koneksi Timeout (Coba Sambungkan)" if "timed out" in err.lower() else "Gagal Autentikasi / Cluster"
+        return None, short_err
 
 
 # ============================================================
@@ -289,7 +308,7 @@ if "cluster_trained" not in st.session_state:
     st.session_state.cluster_trained = False
 
 # MongoDB Connection Check
-mongo_client = get_mongo_client()
+mongo_client, mongo_status_msg = get_mongo_client()
 is_mongo_online = mongo_client is not None
 
 komentar_count = 0
@@ -359,15 +378,18 @@ with st.sidebar:
         )
     else:
         st.markdown(
-            '<div style="background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.25); border-radius: 8px; padding: 9px 12px; margin-bottom: 12px; display: flex; align-items: center; gap: 10px;">'
-            '<span style="color: #EF4444; font-size: 0.95rem;">●</span>'
-            '<div style="line-height: 1.35;">'
-            '<div style="font-size: 0.8rem; font-weight: 700; color: #F87171;">MongoDB: Disconnected</div>'
-            '<div style="font-size: 0.72rem; color: #94A3B8;">Check MONGODB_URI</div>'
-            '</div>'
-            '</div>',
+            f'<div style="background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.25); border-radius: 8px; padding: 9px 12px; margin-bottom: 8px; display: flex; align-items: center; gap: 10px;">'
+            f'<span style="color: #EF4444; font-size: 0.95rem;">●</span>'
+            f'<div style="line-height: 1.35;">'
+            f'<div style="font-size: 0.8rem; font-weight: 700; color: #F87171;">MongoDB: Disconnected</div>'
+            f'<div style="font-size: 0.69rem; color: #94A3B8;">{mongo_status_msg}</div>'
+            f'</div>'
+            f'</div>',
             unsafe_allow_html=True
         )
+        if st.button("🔄 Hubungkan Ulang", key="btn_reconnect_mongo", use_container_width=True):
+            st.cache_resource.clear()
+            st.rerun()
 
     c_sb1, c_sb2 = st.columns(2)
     with c_sb1:
