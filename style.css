@@ -1,0 +1,690 @@
+/* ============================================================
+   NEXUSAI STUDIO
+   GLOBAL DESIGN SYSTEM v1.0
+   Modern AI Platform - Clean Dark Interface
+   ============================================================ */
+
+
+/* ============================================================
+   1. FONT IMPORT
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+
+/* ============================================================
+   2. GLOBAL COLOR VARIABLES
+   ============================================================ */
+
+:root {
+    --bg-main: #10141D;
+    --bg-sidebar: #151A24;
+    --bg-card: #191F2B;
+    --bg-card-hover: #202938;
+
+    --primary: #4388F5;
+    --primary-hover: #3478E5;
+    --primary-soft: rgba(67, 136, 245, 0.12);
+
+    --accent: #A78BFA;
+    --success: #20C997;
+    --warning: #E8A34B;
+    --danger: #F87171;
+
+    --text-primary: #F1F5F9;
+    --text-secondary: #A7B0C0;
+    --text-muted: #758196;
+
+    --border: rgba(148, 163, 184, 0.14);
+    --border-hover: rgba(67, 136, 245, 0.45);
+
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+
+    --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.16);
+}
+
+
+/* ============================================================
+   3. GLOBAL APPLICATION
+   ============================================================ */
+
+.stApp {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+html,
+body,
+[class*="css"] {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+#MainMenu {
+    visibility: hidden;
+}
+
+footer {
+    visibility: hidden;
+}
+
+header[data-testid="stHeader"] {
+    background: rgba(16, 20, 29, 0.92);
+}
+
+
+/* ============================================================
+   4. MAIN CONTENT AREA
+   ============================================================ */
+
+section[data-testid="stMain"] {
+    background-color: var(--bg-main);
+}
+
+div[data-testid="stMainBlockContainer"] {
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+    max-width: 1500px;
+}
+
+
+/* ============================================================
+   5. TYPOGRAPHY
+   ============================================================ */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    color: var(--text-primary) !important;
+    letter-spacing: -0.35px;
+}
+
+h1 {
+    font-size: 1.9rem !important;
+    font-weight: 800 !important;
+    line-height: 1.3 !important;
+}
+
+h2 {
+    font-size: 1.5rem !important;
+    font-weight: 700 !important;
+    line-height: 1.35 !important;
+}
+
+h3 {
+    font-size: 1.2rem !important;
+    font-weight: 700 !important;
+    line-height: 1.4 !important;
+}
+
+h4 {
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+}
+
+p,
+li,
+label {
+    font-size: 0.92rem;
+    line-height: 1.65;
+}
+
+small {
+    color: var(--text-secondary);
+}
+
+code,
+pre {
+    font-family: 'JetBrains Mono', monospace !important;
+    font-size: 0.85rem !important;
+}
+
+
+/* ============================================================
+   6. METRIC CARDS
+   ============================================================ */
+
+div[data-testid="stMetric"] {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 16px 18px;
+    box-shadow: var(--shadow-card);
+    transition: border-color 0.2s ease,
+        background-color 0.2s ease;
+}
+
+div[data-testid="stMetric"]:hover {
+    border-color: var(--border-hover);
+    background: var(--bg-card-hover);
+}
+
+div[data-testid="stMetricLabel"] p {
+    color: var(--text-secondary) !important;
+    font-size: 0.82rem !important;
+    font-weight: 600 !important;
+}
+
+div[data-testid="stMetricValue"] div {
+    color: var(--text-primary) !important;
+    font-size: 1.65rem !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.5px;
+}
+
+div[data-testid="stMetricDelta"] {
+    font-size: 0.78rem !important;
+}
+
+
+/* ============================================================
+   7. PRIMARY BUTTONS
+   ============================================================ */
+
+/* Minimal Primary Buttons */
+button[kind="primary"] {
+    background: #3B82F6 !important;
+    border: 1px solid #3B82F6 !important;
+    border-radius: 8px !important;
+
+    font-size: 0.84rem !important;
+    font-weight: 600 !important;
+    padding: 8px 12px !important;
+
+    box-shadow: none !important;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+button[kind="primary"]:hover {
+    background: #2563EB !important;
+    border-color: #2563EB !important;
+    box-shadow: none !important;
+    transform: none !important;
+}
+
+
+/* ============================================================
+   8. SECONDARY BUTTONS
+   ============================================================ */
+
+button[kind="secondary"],
+button[data-testid="stBaseButton-secondary"] {
+    background: var(--bg-card) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: var(--radius-sm) !important;
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-size: 0.86rem !important;
+    font-weight: 600 !important;
+    padding: 8px 16px !important;
+    box-shadow: none !important;
+    transition: background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+button[kind="secondary"]:hover,
+button[data-testid="stBaseButton-secondary"]:hover {
+    background: var(--bg-card-hover) !important;
+    border-color: var(--border-hover) !important;
+}
+
+
+/* ============================================================
+   9. INPUTS AND SELECTBOXES
+   ============================================================ */
+
+div[data-baseweb="input"],
+div[data-baseweb="textarea"],
+div[data-baseweb="select"]>div {
+    background: var(--bg-card) !important;
+    border-color: var(--border) !important;
+    border-radius: var(--radius-sm) !important;
+}
+
+div[data-baseweb="input"]:focus-within,
+div[data-baseweb="textarea"]:focus-within {
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 0 1px var(--primary) !important;
+}
+
+input,
+textarea {
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-size: 0.9rem !important;
+}
+
+div[data-baseweb="select"] span {
+    font-size: 0.88rem;
+}
+
+
+/* ============================================================
+   10. TABS
+   ============================================================ */
+
+button[data-baseweb="tab"] {
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-size: 0.9rem !important;
+    font-weight: 600 !important;
+}
+
+button[data-baseweb="tab"][aria-selected="true"] {
+    color: var(--primary) !important;
+}
+
+div[data-baseweb="tab-highlight"] {
+    background-color: var(--primary) !important;
+}
+
+
+/* ============================================================
+   11. EXPANDER
+   ============================================================ */
+
+div[data-testid="stExpander"] {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+}
+
+div[data-testid="stExpander"] summary {
+    font-weight: 600;
+}
+
+
+/* ============================================================
+   12. DATAFRAME AND TABLE
+   ============================================================ */
+
+div[data-testid="stDataFrame"] {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+div[data-testid="stTable"] {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+
+/* ============================================================
+   13. ALERTS AND NOTIFICATIONS
+   ============================================================ */
+
+div[data-testid="stAlert"] {
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+}
+
+
+/* ============================================================
+   14. RADIO AND CHECKBOX
+   ============================================================ */
+
+div[role="radiogroup"] label,
+div[data-testid="stCheckbox"] label {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.88rem !important;
+}
+
+
+/* ============================================================
+   15. CUSTOM BADGES
+   ============================================================ */
+
+/* Minimal Workspace Badges */
+.nexus-badge {
+    display: inline-block;
+    padding: 4px 9px;
+
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+
+    border-radius: 6px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+.badge-blue {
+    background: rgba(59, 130, 246, 0.08);
+    color: #93C5FD;
+    border: 1px solid rgba(59, 130, 246, 0.18);
+}
+
+.badge-purple {
+    background: rgba(168, 85, 247, 0.08);
+    color: #D8B4FE;
+    border: 1px solid rgba(168, 85, 247, 0.18);
+}
+
+.badge-green {
+    background: rgba(16, 185, 129, 0.08);
+    color: #6EE7B7;
+    border: 1px solid rgba(16, 185, 129, 0.18);
+}
+
+.badge-amber {
+    background: rgba(245, 158, 11, 0.08);
+    color: #FCD34D;
+    border: 1px solid rgba(245, 158, 11, 0.18);
+}
+
+
+/* ============================================================
+   16. MODULE COLOR MARKERS
+   ============================================================ */
+
+.theme-btn-blue {
+    --module-accent: #4388F5;
+}
+
+.theme-btn-purple {
+    --module-accent: #A78BFA;
+}
+
+.theme-btn-green {
+    --module-accent: #20C997;
+}
+
+.theme-btn-amber {
+    --module-accent: #E8A34B;
+}
+
+
+/* ============================================================
+   17. LINKS
+   ============================================================ */
+
+a {
+    color: #75AAFF;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #A5C8FF;
+}
+
+
+/* ============================================================
+   18. FOCUS ACCESSIBILITY
+   ============================================================ */
+
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid var(--primary) !important;
+    outline-offset: 2px;
+}
+
+
+/* ============================================================
+   19. RESPONSIVE LAYOUT
+   ============================================================ */
+
+@media (max-width: 900px) {
+    div[data-testid="stMainBlockContainer"] {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+    }
+
+    h1 {
+        font-size: 1.65rem !important;
+    }
+
+    h2 {
+        font-size: 1.35rem !important;
+    }
+}
+
+@media (max-width: 600px) {
+    div[data-testid="stMainBlockContainer"] {
+        padding-top: 1.25rem;
+        padding-left: 0.9rem;
+        padding-right: 0.9rem;
+    }
+
+    h1 {
+        font-size: 1.45rem !important;
+    }
+
+    div[data-testid="stMetricValue"] div {
+        font-size: 1.3rem !important;
+    }
+}
+
+
+/* ============================================================
+   GLOBAL REFINEMENT - FIX 1
+   ============================================================ */
+
+/* Memperbaiki ukuran judul Streamlit */
+div[data-testid="stHeading"] h1 {
+    font-size: 1.9rem !important;
+}
+
+div[data-testid="stHeading"] h2 {
+    font-size: 1.5rem !important;
+}
+
+div[data-testid="stHeading"] h3 {
+    font-size: 1.15rem !important;
+}
+
+/* Memperbaiki tampilan metric cards */
+div[data-testid="stMetric"] {
+    background: #191F2B !important;
+    border: 1px solid rgba(148, 163, 184, 0.14) !important;
+    border-radius: 12px !important;
+    padding: 14px !important;
+    min-width: 0 !important;
+}
+
+/* Ukuran nilai metric */
+div[data-testid="stMetricValue"],
+div[data-testid="stMetricValue"] * {
+    font-size: 1.45rem !important;
+    line-height: 1.3 !important;
+    font-weight: 700 !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
+}
+
+/* Label metric */
+div[data-testid="stMetricLabel"] * {
+    font-size: 0.78rem !important;
+    line-height: 1.4 !important;
+    color: #A7B0C0 !important;
+}
+
+/* Delta metric */
+div[data-testid="stMetricDelta"],
+div[data-testid="stMetricDelta"] * {
+    font-size: 0.72rem !important;
+    line-height: 1.4 !important;
+}
+
+/* Jarak antar elemen dashboard */
+div[data-testid="stMetric"] {
+    margin-bottom: 4px;
+}
+
+/* ============================================================
+   SIDEBAR STYLING & BREATHING SPACE
+   ============================================================ */
+section[data-testid="stSidebar"] {
+    width: 310px !important;
+    min-width: 290px !important;
+}
+
+section[data-testid="stSidebar"] div[data-testid="stVerticalBlock"] {
+    gap: 0.95rem !important;
+}
+
+section[data-testid="stSidebar"] hr {
+    margin: 1.1rem 0 !important;
+    opacity: 0.25 !important;
+}
+
+section[data-testid="stSidebar"] div[data-testid="stRadio"] {
+    margin-top: 4px !important;
+    margin-bottom: 6px !important;
+}
+
+/* ============================================================
+   POPOVER / MODAL STYLING
+   ============================================================ */
+div[data-testid="stPopover"] > button {
+    background: rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid rgba(148, 163, 184, 0.18) !important;
+    color: var(--text-secondary) !important;
+    font-size: 0.76rem !important;
+    font-weight: 600 !important;
+    padding: 5px 10px !important;
+    border-radius: 6px !important;
+    margin-bottom: 6px !important;
+    transition: all 0.2s ease !important;
+}
+
+div[data-testid="stPopover"] > button:hover {
+    border-color: var(--primary) !important;
+    color: var(--text-primary) !important;
+    background: rgba(67, 136, 245, 0.08) !important;
+}
+
+div[data-testid="stPopoverBody"] {
+    background: #151A24 !important;
+    border: 1px solid rgba(148, 163, 184, 0.22) !important;
+    border-radius: 10px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+    padding: 12px 15px !important;
+    max-width: 420px !important;
+}
+
+div[data-testid="stPopoverBody"] p,
+div[data-testid="stPopoverBody"] li {
+    font-size: 0.81rem !important;
+    line-height: 1.42 !important;
+    color: #CBD5E1 !important;
+}
+
+div[data-testid="stPopoverBody"] ul {
+    margin: 3px 0 !important;
+    padding-left: 16px !important;
+}
+
+div[data-testid="stPopoverBody"] li {
+    margin-bottom: 2px !important;
+}
+
+div[data-testid="stPopoverBody"] h5 {
+    font-size: 0.9rem !important;
+    font-weight: 700 !important;
+    color: #F1F5F9 !important;
+    margin-bottom: 4px !important;
+}
+
+/* ============================================================
+   NEXUS HERO BANNER (COMPACT REFINED DESIGN)
+   ============================================================ */
+.nexus-hero {
+    background: linear-gradient(135deg, rgba(25, 31, 43, 0.95) 0%, rgba(16, 20, 29, 0.95) 100%);
+    border: 1px solid rgba(148, 163, 184, 0.14);
+    border-radius: 12px;
+    padding: 12px 18px !important;
+    margin-bottom: 12px !important;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+}
+
+.nexus-hero-eyebrow {
+    display: inline-block;
+    padding: 2px 8px;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    border-radius: 999px;
+    text-transform: uppercase;
+    background: rgba(67, 136, 245, 0.12);
+    color: #75AAFF;
+    border: 1px solid rgba(67, 136, 245, 0.22);
+    margin-bottom: 4px;
+}
+
+.nexus-hero-title {
+    font-size: 1.25rem !important;
+    font-weight: 700 !important;
+    color: #F1F5F9 !important;
+    letter-spacing: -0.3px;
+    margin: 2px 0 6px 0 !important;
+    line-height: 1.3 !important;
+}
+
+.nexus-hero-description {
+    font-size: 0.84rem !important;
+    color: #A7B0C0 !important;
+    line-height: 1.45 !important;
+    margin: 0 0 8px 0 !important;
+    max-width: 950px;
+}
+
+.nexus-hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    font-size: 0.76rem;
+    color: #94A3B8;
+    padding-top: 6px;
+    border-top: 1px solid rgba(148, 163, 184, 0.12);
+    align-items: center;
+}
+
+/* ============================================================
+   METRIC CARD REFINEMENT (UNIFORM & UNTRUNCATED)
+   ============================================================ */
+div[data-testid="stMetric"] {
+    background: #191F2B !important;
+    border: 1px solid rgba(148, 163, 184, 0.14) !important;
+    border-radius: 10px !important;
+    padding: 12px 14px !important;
+    min-height: 108px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    margin-bottom: 4px;
+}
+
+div[data-testid="stMetricLabel"] * {
+    font-size: 0.76rem !important;
+    color: #94A3B8 !important;
+    font-weight: 600 !important;
+    line-height: 1.3 !important;
+}
+
+div[data-testid="stMetricValue"],
+div[data-testid="stMetricValue"] * {
+    font-size: 1.4rem !important;
+    font-weight: 800 !important;
+    line-height: 1.2 !important;
+    color: #F1F5F9 !important;
+}
+
+div[data-testid="stMetricDelta"],
+div[data-testid="stMetricDelta"] * {
+    font-size: 0.72rem !important;
+    line-height: 1.3 !important;
+    white-space: normal !important;
+    overflow-wrap: break-word !important;
+}
+
+div[data-testid="stMetricDelta"] svg {
+    display: none !important;
+}

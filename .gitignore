@@ -135,6 +135,8 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+.env
+
 
 # Spyder project settings
 .spyderproject
@@ -188,3 +190,7 @@ cython_debug/
 
 test_mongo.py
 retrain_iris.py
+app_asli.py
+app_copy_cluster.py
+app_kmeans.py
+test_mangoDB.py
